@@ -1,4 +1,5 @@
 const firebase = require('firebase')
+const moment = require('moment')
 
 const body = document.getElementById("body");
 const logs = document.getElementById("logs");
@@ -23,13 +24,17 @@ function logUser(name) {
     return `<div class="log-user">${name}</div>`
 }
 
+new Date().toLocaleString()
+
 function logRow(doc) {
+    const d = doc.data().timestamp.toDate();
+
     return `<div class="log-row">
         <div class="log-event">${doc.data().event}</div>
         <div class="log-users">
             ${doc.data().users.map(logUser).join(", ")}
         </div>
-        <div class="log-date">${doc.data().timestamp.toDate().toLocaleString()}</div>
+        <div class="log-date">${moment(d).format("YYYY-MM-DD hh:mm:ss")}</div>
     </div>`
 }
 
@@ -38,7 +43,6 @@ function notDefault(doc) {
 }
 
 function updateLogTable(snap) {
-    console.log(snap)
     logs.innerHTML = snap.docs
         .filter(notDefault)
         .map(logRow)

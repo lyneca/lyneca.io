@@ -11,17 +11,27 @@ div.title {
 }
 
 div.table {
-    padding: 10px;
+    padding: 0 10px;
     border: 1px solid #dddddd;
     border-radius: 5px;
 }
 
-div.log-row {
+div#table-title {
+    margin: 0 10px;
+}
+
+div.log-row,
+div#table-title {
     padding: 5px;
     display: grid;
     grid-template-columns: 2fr 4fr 2fr;
 }
 
-div.log-row div {
+div.log-row:not(:last-child) {
+    border-bottom: 1px solid #dddddd;
+}
+
+div.log-row div,
+div.table-title-cell {
     display: inline-block;
 }
