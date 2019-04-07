@@ -19,23 +19,30 @@ const firestore = firebase.firestore();
 const tallies = firestore.collection("tallies");
 const events = firestore.collection("event");
 
-function logUser(member) {
+function logUser(name) {
     return `<div class="log-user">${name}</div>`
 }
 
 function logRow(doc) {
     return `<div class="log-row">
         <div class="log-event">${doc.data().event}</div>
-        <div class="log-date">${doc.data().timestamp.toDate().toLocaleString()}</div>
         <div class="log-users">
-            ${doc.data().users.map(logUser)}
+            ${doc.data().users.map(logUser).join(", ")}
         </div>
+        <div class="log-date">${doc.data().timestamp.toDate().toLocaleString()}</div>
     </div>`
+}
+
+function notDefault(doc) {
+    return doc.id !== 'default';
 }
 
 function updateLogTable(snap) {
     console.log(snap)
-    logs.innerHTML = snap.docs.map(logRow).join("")
+    logs.innerHTML = snap.docs
+        .filter(notDefault)
+        .map(logRow)
+        .join("")
 }
 
 tallies.onSnapshot(snap => {

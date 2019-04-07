@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+body {
+    font-family: 'Inconsolata';
+}
+
+div.title {
+    font-size: 50px;
+    text-align: center;
+    margin: 20px;
+}
+
+div.table {
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+}
+
+div.log-row {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr;
+}
+
+div.log-row div {
+    display: inline-block;
+}
