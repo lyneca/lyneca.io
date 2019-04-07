@@ -53964,7 +53964,7 @@ function updateLogTable(snap) {
         .join("")
 }
 
-tallies.onSnapshot(snap => {
+tallies.orderBy("timestamp", "desc").onSnapshot(snap => {
     updateLogTable(snap);
 });
 
